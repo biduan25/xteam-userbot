@@ -1,20 +1,21 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+FROM ohshin/ubot:dev
 
-FROM theteamultroid/ultroid:main
+WORKDIR /xteam-cloner
+RUN chmod 777 /xteam-cloner
 
-# set timezone
-ENV TZ=Asia/Kolkata
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# Installing Requirements
+RUN pip3 install -U pip
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
 
+# If u want to use /update feature, uncomment the following and edit
+#RUN git config --global user.email "your_email"
+#RUN git config --global user.name "git_username"
+
+# Copying All Source
 COPY installer.sh .
 
 RUN bash installer.sh
 
-# changing workdir
-WORKDIR "/root/xteam-cloner"
-
-# start the bot.
-CMD ["bash", "startup"]
+# Starting Bot
+CMD ["bash","start.sh"]
