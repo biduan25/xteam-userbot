@@ -13,9 +13,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 #RUN git config --global user.name "git_username"
 
 # Copying All Source
-COPY installer.sh .
-
-RUN bash installer.sh
+COPY . .
 
 # Starting Bot
 CMD ["bash","start"]
