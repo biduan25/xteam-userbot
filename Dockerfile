@@ -18,4 +18,4 @@ COPY installer.sh .
 RUN bash installer.sh
 
 # Starting Bot
-CMD ["bash","start.sh"]
+CMD ["bash","start"]
